@@ -6,6 +6,9 @@
 
 Adafruit_LiquidCrystal lcd(0);
 
+
+
+
 #define BotA 2
 #define BotB 3
 #define BotC 4
@@ -56,18 +59,18 @@ byte moons[10] = {
   B00000,
   B00000,
 };
-  
-  
+ 
+ 
 void setup(){
 
-  
+ 
   {  
-    
+   
   pinMode(BotA, INPUT);
   pinMode(BotB, INPUT);
   pinMode(BotC, INPUT);
   pinMode(BotD, INPUT);
-  lcd.begin(16, 2);
+  lcd.begin(20, 4);
   lcd.clear();
   lcd.setCursor(0,0);
 }
@@ -76,75 +79,68 @@ void setup(){
   lcd.createChar (3, moonz);
   lcd.createChar (4, moons);
    lcd.setCursor (0,0);
- lcd.setCursor(14, 0);
+ lcd.setCursor(0,1);
   lcd.write(byte(2));
-  lcd.setCursor(15, 0);
+  lcd.setCursor(1, 1);
   lcd.write(byte(1));
-  lcd.setCursor(14, 1);
+  lcd.setCursor(0, 2);
   lcd.write (byte(3));
-  lcd.setCursor (15, 1);
+  lcd.setCursor (1, 2);
   lcd.write(byte(4));
-  lcd.setCursor(16, 0);
-  
-   lcd.print("Seja Bem Vindo!");
-  
-  lcd.createChar(1, moonx);
-  lcd.createChar(2, moony);
-  lcd.createChar (3, moonz);
-  lcd.createChar (4, moons);
-   lcd.setCursor (0,0);
- lcd.setCursor(31, 0);
-  lcd.write(byte(2));
-  lcd.setCursor(32, 0);
-  lcd.write(byte(1));
-  lcd.setCursor(31, 1);
-  lcd.write (byte(3));
-  lcd.setCursor (32, 1);
-  lcd.write(byte(4));
+  lcd.setCursor(20, 0);
+
+  lcd.setCursor(2,1);
+  lcd.print("Seja Bem Vindo!");
  
+  lcd.setCursor(17, 1);
+  lcd.write(byte(2));
+  lcd.setCursor(18, 1);
+  lcd.write(byte(1));
+  lcd.setCursor(17, 2);
+  lcd.write (byte(3));
+  lcd.setCursor (18, 2);
+  lcd.write(byte(4));
+  lcd.setCursor(20, 0);
+ delay(5000);
  
   for(int i=0; i<=100; i++){
   lcd.scrollDisplayLeft();
    
-  
+ 
   }
  Serial.begin(9600);
- lcd.clear(); 
- delay(100);
-  
+ lcd.clear();
+ delay(1000);
+ 
  geraSequencia();
-} 
+}
 
 void loop(){
-  
-  
+ 
+ 
   for (int i = 0; i < nQuestao; i++)
       SelecionaQuestao(array[i]);
-  
+ 
 {
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("Fim de Jogo!");
-  
+ 
   delay(2000);
 }
   }
 void SelecionaQuestao(int nQuestao){
-  
+ 
   switch(nQuestao){
     case 0:
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Quanto vale PI?");
           lcd.setCursor(0,1);
-         lcd.print("a) 3,45");
+         lcd.print("a) 3,45 b)2,14");
          lcd.setCursor(0,2);
-         lcd.print("b) 2,14");
-         lcd.setCursor(0,3);
-         lcd.print("c) 3,14");
-         lcd.setCursor(0,4);
-         lcd.print("d) 2,45");
-          
+         lcd.print("c)3,14 d)2,45");
+          delay(5000);
         if(AnalisaBotao()=='C'){
           lcd.setCursor(0,3);
           lcd.print("Correto!");
@@ -159,16 +155,13 @@ void SelecionaQuestao(int nQuestao){
     case 1:
         lcd.clear();
           lcd.setCursor(0,0);
-          lcd.print("Quem escreveu Iracema?");
+          lcd.print("Quem escreveu");
           lcd.setCursor(0,1);
-          lcd.print("a) Castro Alves");
-         lcd.setCursor(0,2);
-         lcd.print("b) Jose de Alencar");
-         lcd.setCursor(0,3);
-         lcd.print("c) Caio Castro");
-         lcd.setCursor(0,4);
-         lcd.print("d) Hilda Hilst");
-    
+          lcd.print("Iracema?");
+          lcd.setCursor(0,2);
+          lcd.print("a)Castro Alves  b)Jose de Alencar");
+          lcd.setCursor(0,3);
+          lcd.print("c)Caio Castro d)Hilda Hilst");
       if(AnalisaBotao()=='b'){
           lcd.setCursor(0,2);
           lcd.print("Correto!");
@@ -178,25 +171,20 @@ void SelecionaQuestao(int nQuestao){
           lcd.setCursor(0,3);
           lcd.setCursor(0,4);
           lcd.print("Errado!");
-          
+         
     break;
     case 2:
         lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Relacao harmonica:");
          lcd.setCursor(0,1);
-         lcd.print("a) Parasitismo");
-         lcd.setCursor(0,2);
-         lcd.print("b) Amensalismo");
-         lcd.setCursor(0,3);
-         lcd.print("c) Predatismo");
-         lcd.setCursor(0,4);
-         lcd.print("d)Mutualismo");
-        
+          lcd.print("a)Parasitismo  b)Amensalismo");
+        lcd.Cursor (0,2);
+        lcd.print("c)Predatismo d)Mutualismo");
          if(AnalisaBotao()=='d'){
           lcd.setCursor(0,4);
           lcd.print("Correto!");
-          ponto = ponto + 10; 
+          ponto = ponto + 10;
         }else{
           lcd.setCursor(0,1);
           lcd.setCursor(0,2);
@@ -208,15 +196,10 @@ void SelecionaQuestao(int nQuestao){
         lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Quem foi Martinho Lutero?");
-         lcd.setCursor(0,1);
-         lcd.print("a) Cozinheiro");
-         lcd.setCursor(0,2);
-         lcd.print("b) Padre");
-         lcd.setCursor(0,3);
-         lcd.print("c) Colonizador");
-         lcd.setCursor(0,4);
-         lcd.print("d) Monge protestante");
-       
+        lcd.setCursor(0,1);
+          lcd.print("a)Cozinheiro  b)Padre");
+          lcd.setCursor (0,2);
+        lcd.print("c)Colonizador d)Monge Protestante");
         if(AnalisaBotao()=='D'){
           lcd.setCursor(0,4);
           lcd.print("Correto!");
@@ -232,15 +215,10 @@ void SelecionaQuestao(int nQuestao){
         lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Qual o maior bloco economico?");
-         lcd.setCursor(0,1);
-         lcd.print("a) Uniao Europeia");
-         lcd.setCursor(0,2);
-         lcd.print("b) Mercosul");
-         lcd.setCursor(0,3);
-         lcd.print("c) Nafta");
-         lcd.setCursor(0,4);
-         lcd.print("d) BRICS");
-        
+        lcd.setCursor(0,1);
+          lcd.print("a)Uniao Europeia b)Mercosul");
+        lcd.setCursor (0,2);
+        lcd.print("c)Nafta d)BRICS");
         if(AnalisaBotao()=='A'){
           lcd.setCursor(0,1);
           lcd.print("Correto!");
@@ -256,15 +234,10 @@ void SelecionaQuestao(int nQuestao){
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Qual o valor do oxigenio?");
-          lcd.setCursor(0,1);
-          lcd.print("a) 5u");
-          lcd.setCursor(0,2);
-          lcd.print("b) 16u");
-          lcd.setCursor(0,3);
-          lcd.print("c) 18u");
-          lcd.setCursor(0,4);
-          lcd.print("d) 7u");
-        
+         lcd.setCursor(0,1);
+          lcd.print("a)5u b)16u");
+        lcd.setCursor (0,2);
+        lcd.print("c)18u d)7u");
         if(AnalisaBotao()=='B'){
           lcd.setCursor(0,2);
           lcd.print("Correto!");
@@ -280,15 +253,11 @@ void SelecionaQuestao(int nQuestao){
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Espelho de maquiagem e:");
+        lcd.setCursor(0,1);
+          lcd.print("a)Concavo b)Convexo");
+        lcd.setCursor (0,2);
+        lcd.print("c)Plano d)Diagonal");
           lcd.setCursor(0,1);
-          lcd.print("a) Concavo");
-          lcd.setCursor(0,2);
-          lcd.print("b) Convexo");
-          lcd.setCursor(0,3);
-          lcd.print("c) Plano");
-          lcd.setCursor(0,4);
-          lcd.print("d) Diagonal");
-        
         if(AnalisaBotao()=='C'){
           lcd.setCursor(0,3);
           lcd.print("Correto!");
@@ -305,14 +274,9 @@ void SelecionaQuestao(int nQuestao){
          lcd.setCursor(0,0);
          lcd.print("Traducao de balcony:");
          lcd.setCursor(0,1);
-         lcd.print("a) Balconista");
-         lcd.setCursor(0,2);
-         lcd.print("b) Sacada");
-         lcd.setCursor(0,3);
-         lcd.print("c) Balcao");
-         lcd.setCursor(0,4);
-         lcd.print("d) Escada");
-    
+         lcd.print("a) Balconista b)Sacada");
+         lcd.setCursor (0,2);
+        lcd.print("c)Balcao d)Escada");
         if(AnalisaBotao()=='b'){
           lcd.setCursor(0,2);
           lcd.print("Correto!");
@@ -325,17 +289,14 @@ void SelecionaQuestao(int nQuestao){
     break;
     case 8:
         lcd.clear();
-          lcd.setCursor(0,0);
-          lcd.print("Construcao da sociedade de Marx:");
-          lcd.setCursor(0,1);
-          lcd.print("a) Colonias");
-          lcd.setCursor(0,2);
-          lcd.print("b) Imperios");
-          lcd.setCursor(0,3);
-          lcd.print("c) Feudos");
-          lcd.setCursor(0,4);
-          lcd.print("d) Luta de classes");
-        
+         lcd.setCursor(0,0);
+         lcd.print("Construcao da");
+         lcd.setCursor (0,1);
+         lcd.print("sociedade de Marx:");
+         lcd.setCursor(0,2);
+         lcd.print("a) Colonias b)Imperios");
+         lcd.Cursor (0,3);
+         lcd.print("c)Feudos d)Luta de classes");
         if(AnalisaBotao()=='d'){
           lcd.setCursor(0,1);
           lcd.print("Correto!");
@@ -350,19 +311,17 @@ void SelecionaQuestao(int nQuestao){
     case 9:
         lcd.clear();
           lcd.setCursor(0,0);
-          lcd.print("Qual a condicao de Eder Oliveira?");
-          lcd.setCursor(0,1);
-        lcd.scrollDisplayLeft();
-          lcd.print("a) Depressao");
+          lcd.print("Qual a condicao");
+          lcd.setCursor (0,1);
+          lcd.print ("de Eder Oliveira?");
           lcd.setCursor(0,2);
-          lcd.print("b) TDAH");
-          lcd.setCursor(0,3);
-          lcd.print("c) Daltonismo");
-          lcd.setCursor(0,4);
-          lcd.print("d) TOC");
-    	lcd.scrollDisplayLeft();
+          lcd.print ("a)Depressao b)TDAH");
+           lcd.setCursor(0,3);
+           lcd.print ("c)Daltonismo d)TOC");
+          delay(5000);
+       
         if(AnalisaBotao()=='c'){
-          lcd.setCursor(0,1);
+         
           lcd.print("Correto!");
           ponto = ponto + 10;
         }else{
@@ -370,17 +329,42 @@ void SelecionaQuestao(int nQuestao){
           lcd.setCursor(0,2);
           lcd.setCursor(0,4);
           lcd.print("Errado!");
-        
+       
         }
+         break;
+    case 10:
+        lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Qual o menor país");
+          lcd.setCursor (0,1);
+          lcd.print("do mundo?");
+          lcd.setCursor (0,2);
+          lcd.print ("a)Monaco b)Vaticano");
+          lcd.setCursor(0,3);
+          lcd.print("c)Maldivas d)Malta");
+           lcd.setCursor(0,3);
+           lcd.print ("c)Daltonismo d)TOC");
+          delay(5000);
+       
+        if(AnalisaBotao()=='c'){
+         
+          lcd.print("Correto!");
+          ponto = ponto + 10;
+        }else{
+          lcd.setCursor(0,1);
+          lcd.setCursor(0,2);
+          lcd.setCursor(0,4);
+          lcd.print("Errado!");
   }
+    
   }
 }
-  
+ 
 
 
   char AnalisaBotao(){
   bool BotaoPressionado = true;
-  
+ 
   while(BotaoPressionado){
     if(digitalRead(BotA)){
       BotaoPressionado = false;
@@ -397,16 +381,16 @@ void SelecionaQuestao(int nQuestao){
    }
   }
  }
-  
+ 
  
 
 
   void geraSequencia(){
   randomSeed(random(0, 1000));
-  for (int i = 0; i < nQuestao; i++){     
+  for (int i = 0; i < nQuestao; i++){    
     array[i] = i;
   }
-    
+   
   for (int i = 0; i < nQuestao; i++) {    
     int temp = array[i];
     int novoIndice = random(nQuestao);
@@ -414,4 +398,3 @@ void SelecionaQuestao(int nQuestao){
     array[novoIndice] = temp;
   }
  }
-
