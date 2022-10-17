@@ -2,12 +2,7 @@
 #include <LiquidCrystal_I2C.h>
 
 
-#include <Adafruit_LiquidCrystal.h>
-
-Adafruit_LiquidCrystal lcd(0);
-
-
-
+LiquidCrystal_I2C lcd(0x27, 2,1,0,4,5,6,7,3,POSITIVE);
 
 #define BotA 2
 #define BotB 3
@@ -15,8 +10,6 @@ Adafruit_LiquidCrystal lcd(0);
 #define BotD 5
 
 int ponto = 0;
-int nQuestao = 10;
-int array[10];
 
 
 byte moonx[10] = {
@@ -61,25 +54,21 @@ byte moons[10] = {
 };
  
  
-void setup(){
-
- 
-  {  
+void setup(){  
    
-  pinMode(BotA, INPUT);
-  pinMode(BotB, INPUT);
-  pinMode(BotC, INPUT);
-  pinMode(BotD, INPUT);
+  pinMode(BotA, INPUT_PULLUP);
+  pinMode(BotB, INPUT_PULLUP);
+  pinMode(BotC, INPUT_PULLUP);
+  pinMode(BotD, INPUT_PULLUP);
   lcd.begin(20, 4);
-  lcd.clear();
+  
   lcd.setCursor(0,0);
-}
   lcd.createChar(1, moonx);
   lcd.createChar(2, moony);
   lcd.createChar (3, moonz);
   lcd.createChar (4, moons);
-   lcd.setCursor (0,0);
- lcd.setCursor(0,1);
+  lcd.setCursor (0,0);
+  lcd.setCursor(0,1);
   lcd.write(byte(2));
   lcd.setCursor(1, 1);
   lcd.write(byte(1));
@@ -105,34 +94,12 @@ void setup(){
  
   for(int i=0; i<=100; i++){
   lcd.scrollDisplayLeft();
-   
- 
   }
- Serial.begin(9600);
- lcd.clear();
- delay(1000);
  
- geraSequencia();
 }
 
 void loop(){
  
- 
-  for (int i = 0; i < nQuestao; i++)
-      SelecionaQuestao(array[i]);
- 
-{
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Fim de Jogo!");
- 
-  delay(2000);
-}
-  }
-void SelecionaQuestao(int nQuestao){
- 
-  switch(nQuestao){
-    case 0:
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Quanto vale PI?");
@@ -140,19 +107,19 @@ void SelecionaQuestao(int nQuestao){
          lcd.print("a) 3,45 b)2,14");
          lcd.setCursor(0,2);
          lcd.print("c)3,14 d)2,45");
-          delay(5000);
+         
         if(AnalisaBotao()=='C'){
           lcd.setCursor(0,3);
           lcd.print("Correto!");
            ponto = ponto + 10;
-        }else{
+        }else {
           lcd.setCursor(0,1);
-          lcd.setCursor(0,2);
+          lcd.setCursor(0,3);
           lcd.setCursor(0,4);
           lcd.print("Errado!");
         }
-    break;
-    case 1:
+
+        
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Quem escreveu");
@@ -162,7 +129,7 @@ void SelecionaQuestao(int nQuestao){
           lcd.print("a)Castro Alves  b)Jose de Alencar");
           lcd.setCursor(0,3);
           lcd.print("c)Caio Castro d)Hilda Hilst");
-      if(AnalisaBotao()=='b'){
+      if(AnalisaBotao()=='B'){
           lcd.setCursor(0,2);
           lcd.print("Correto!");
            ponto = ponto + 10;
@@ -171,17 +138,16 @@ void SelecionaQuestao(int nQuestao){
           lcd.setCursor(0,3);
           lcd.setCursor(0,4);
           lcd.print("Errado!");
+
          
-    break;
-    case 2:
         lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Relacao harmonica:");
          lcd.setCursor(0,1);
           lcd.print("a)Parasitismo  b)Amensalismo");
-        lcd.Cursor (0,2);
+        lcd.setCursor (0,2);
         lcd.print("c)Predatismo d)Mutualismo");
-         if(AnalisaBotao()=='d'){
+         if(AnalisaBotao()=='D'){
           lcd.setCursor(0,4);
           lcd.print("Correto!");
           ponto = ponto + 10;
@@ -191,8 +157,8 @@ void SelecionaQuestao(int nQuestao){
           lcd.setCursor(0,3);
           lcd.print("Errado!");
         }
-    break;
-    case 3:
+
+        
         lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Quem foi Martinho Lutero?");
@@ -210,8 +176,8 @@ void SelecionaQuestao(int nQuestao){
            lcd.setCursor(0,3);
           lcd.print("Errado!");
         }
-    break;
-    case 4:
+
+        
         lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Qual o maior bloco economico?");
@@ -229,8 +195,8 @@ void SelecionaQuestao(int nQuestao){
            lcd.setCursor(0,4);
           lcd.print("Errado!");
         }
-    break;
-    case 5:
+
+
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Qual o valor do oxigenio?");
@@ -248,8 +214,8 @@ void SelecionaQuestao(int nQuestao){
           lcd.setCursor(0,4);
           lcd.print("Errado!");
         }
-    break;
-    case 6:
+
+
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Espelho de maquiagem e:");
@@ -268,8 +234,8 @@ void SelecionaQuestao(int nQuestao){
            lcd.setCursor(0,4);
           lcd.print("Errado!");
         }
-    break;
-    case 7:
+
+
          lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Traducao de balcony:");
@@ -277,7 +243,7 @@ void SelecionaQuestao(int nQuestao){
          lcd.print("a) Balconista b)Sacada");
          lcd.setCursor (0,2);
         lcd.print("c)Balcao d)Escada");
-        if(AnalisaBotao()=='b'){
+        if(AnalisaBotao()=='B'){
           lcd.setCursor(0,2);
           lcd.print("Correto!");
         }else{
@@ -286,8 +252,8 @@ void SelecionaQuestao(int nQuestao){
           lcd.setCursor(0,4);
           lcd.print("Errado!");
         }
-    break;
-    case 8:
+
+
         lcd.clear();
          lcd.setCursor(0,0);
          lcd.print("Construcao da");
@@ -295,9 +261,9 @@ void SelecionaQuestao(int nQuestao){
          lcd.print("sociedade de Marx:");
          lcd.setCursor(0,2);
          lcd.print("a) Colonias b)Imperios");
-         lcd.Cursor (0,3);
+         lcd.setCursor (0,3);
          lcd.print("c)Feudos d)Luta de classes");
-        if(AnalisaBotao()=='d'){
+        if(AnalisaBotao()=='D'){
           lcd.setCursor(0,1);
           lcd.print("Correto!");
           ponto = ponto + 10;
@@ -307,8 +273,8 @@ void SelecionaQuestao(int nQuestao){
           lcd.setCursor(0,3);
           lcd.print("Errado!");
         }
-    break;
-    case 9:
+
+
         lcd.clear();
           lcd.setCursor(0,0);
           lcd.print("Qual a condicao");
@@ -319,9 +285,7 @@ void SelecionaQuestao(int nQuestao){
            lcd.setCursor(0,3);
            lcd.print ("c)Daltonismo d)TOC");
           delay(5000);
-       
-        if(AnalisaBotao()=='c'){
-         
+        if(AnalisaBotao()=='C'){
           lcd.print("Correto!");
           ponto = ponto + 10;
         }else{
@@ -331,22 +295,20 @@ void SelecionaQuestao(int nQuestao){
           lcd.print("Errado!");
        
         }
-         break;
-    case 10:
+
+
         lcd.clear();
           lcd.setCursor(0,0);
-          lcd.print("Qual o menor país");
+          lcd.print("Qual o menor pais");
           lcd.setCursor (0,1);
           lcd.print("do mundo?");
           lcd.setCursor (0,2);
           lcd.print ("a)Monaco b)Vaticano");
           lcd.setCursor(0,3);
           lcd.print("c)Maldivas d)Malta");
-           lcd.setCursor(0,3);
-           lcd.print ("c)Daltonismo d)TOC");
           delay(5000);
        
-        if(AnalisaBotao()=='c'){
+        if(AnalisaBotao()=='C'){
          
           lcd.print("Correto!");
           ponto = ponto + 10;
@@ -366,35 +328,18 @@ void SelecionaQuestao(int nQuestao){
   bool BotaoPressionado = true;
  
   while(BotaoPressionado){
-    if(digitalRead(BotA)){
+    if(!digitalRead(BotA)){
       BotaoPressionado = false;
       return 'A';
-    }else if(digitalRead(BotB)){
+    }else if(!digitalRead(BotB)){
       BotaoPressionado = false;
       return 'B';
-    }else if(digitalRead(BotC)){
+    }else if(!digitalRead(BotC)){
       BotaoPressionado = false;
       return 'C';
-    }else if(digitalRead(BotD)){
+    }else if(!digitalRead(BotD)){
       BotaoPressionado = false;
       return 'D';
    }
-  }
- }
- 
- 
-
-
-  void geraSequencia(){
-  randomSeed(random(0, 1000));
-  for (int i = 0; i < nQuestao; i++){    
-    array[i] = i;
-  }
-   
-  for (int i = 0; i < nQuestao; i++) {    
-    int temp = array[i];
-    int novoIndice = random(nQuestao);
-    array[i] = array[novoIndice];
-    array[novoIndice] = temp;
   }
  }
