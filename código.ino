@@ -2,7 +2,7 @@
 #include <LiquidCrystal_I2C.h>
 
 
-LiquidCrystal_I2C lcd(0x27, 2,1,0,4,5,6,7,3,POSITIVE);
+LiquidCrystal_I2C lcd(0x27,20,4);
 /*Embaralhar as perguntas e respostas*/
 #define BotA 3
 #define BotB 5
@@ -60,8 +60,8 @@ void setup(){
   pinMode(BotC, INPUT_PULLUP);
   pinMode(BotD, INPUT_PULLUP);
   pinMode(4, INPUT);
-  lcd.begin(20, 4);
- 
+  lcd.init();
+   lcd.backlight();
   lcd.setCursor(0,0);
   lcd.createChar(1, moonx);
   lcd.createChar(2, moony);
@@ -296,7 +296,97 @@ case 10:////////
           errado();
           } delay(2000);
   break;
-  case 11:
+  
+  case 11:  
+         lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("O Descobrimento do");
+          lcd.setCursor (0,1);
+          lcd.print("Brasil foi em:");
+          lcd.setCursor (0,2);
+          lcd.print ("a)1498 b)1500");
+          lcd.setCursor(0,3);
+          lcd.print("c)1375 d)1545");
+       
+        if(AnalisaBotao()=='B'){
+         certo();
+        }else{
+          errado();
+          } delay(2000);
+  break;
+
+ case 12:  
+         lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Qual nao e uma");
+          lcd.setCursor (0,1);
+          lcd.print("fase lunar:");
+          lcd.setCursor (0,2);
+          lcd.print ("a)minguante b)cheia");
+          lcd.setCursor(0,3);
+          lcd.print("c)vazia d)crescente");
+       
+        if(AnalisaBotao()=='C'){
+         certo();
+        }else{
+          errado();
+          } delay(2000);
+  break;
+  
+  case 13:  
+         lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Idade do");
+          lcd.setCursor (0,1);
+          lcd.print("Shawn Mendes:");
+          lcd.setCursor (0,2);
+          lcd.print ("a)24 b)21");
+          lcd.setCursor(0,3);
+          lcd.print("c)30 d)23");
+       
+        if(AnalisaBotao()=='A'){
+         certo();
+        }else{
+          errado();
+          } delay(2000);
+  break;
+
+  case 14:  
+         lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Quantas cores tem");
+          lcd.setCursor (0,1);
+          lcd.print("tem o arco-iris:");
+          lcd.setCursor (0,2);
+          lcd.print ("a)5 b)9");
+          lcd.setCursor(0,3);
+          lcd.print("c)10 d)7");
+       
+        if(AnalisaBotao()=='D'){
+         certo();
+        }else{
+          errado();
+          } delay(2000);
+  break;
+  case 15:  
+         lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Maior estrela do");
+          lcd.setCursor (0,1);
+          lcd.print("sistema solar:");
+          lcd.setCursor (0,2);
+          lcd.print ("a)Sol b)Sirius");
+          lcd.setCursor(0,3);
+          lcd.print("c)Vega d)Rigel");
+       
+        if(AnalisaBotao()=='A'){
+         certo();
+        }else{
+          errado();
+          } delay(2000);
+  break;
+  
+  case 16:
     lcd.clear();
     lcd.setCursor(1,1);
     lcd.print("Fim do jogo!");
@@ -355,5 +445,4 @@ void certo (){
    lcd.setCursor(11,1);
    lcd.print("ponto(s)");
  }
-
 
